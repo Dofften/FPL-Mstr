@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) and [`FastAPI`](https://fastapi.tiangolo.com/) webapp to provide useful analytics to FPL Managers. It recommends transfers, compares managers' teams to team selected by AI, compares managers' teams to top 15 FPL managers and also makes predictions on player points.
+This is a [Next.js](https://nextjs.org/) and [FastAPI](https://fastapi.tiangolo.com/) webapp to provide useful analytics to FPL Managers. It recommends transfers, compares managers' teams to team selected by AI, compares managers' teams to top 15 FPL managers and also makes predictions on player points.
 
 ## Getting Started
 
@@ -26,7 +26,14 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000/dashboard/your-manager-id](http://localhost:3000/dashboard/your-manager-id) with your browser to see your dashboard.
+
+Visit [http://localhost:3000/dashboard/your-team-id](http://localhost:3000/dashboard/your-team-id) with your browser to see your dashboard.
+
+### How to get team ID
+- Log in to [FPL](https://fantasy.premierleague.com/) and navigate to the points page/gameweek history page.
+- The URL will have a unique number between /entry/ and /event/ which is your FPL team ID.
+- You need to do this via a browser on a mobile/tablet/laptop/desktop.
+
 
 ## ToDo
 - [x] Create user dashboard
