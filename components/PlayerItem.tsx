@@ -23,6 +23,8 @@ export default function PlayerItem(props: {
   now_cost: number;
   form: number;
   fixture: string;
+  fixture1: string;
+  fixture2: string;
   selected_by_percent: number;
   predictedPoints?: number;
   captain?: string;
@@ -151,14 +153,17 @@ export default function PlayerItem(props: {
           <div className="flex-grow border-t border-gray-400"></div>
         </div>
         <div className="flex justify-around">
-          <div className="flex rounded shadow p-3">
-            BRE <div className="bg-green-200 rounded px-3 mx-2">2</div>
+          <div className="flex rounded shadow p-1 mx-1 text-xs md:text-sm">
+            {props.fixture}{" "}
+            <div className="bg-green-200 rounded px-3 mx-2">2</div>
           </div>
-          <div className="flex rounded shadow p-3">
-            MUN <div className="bg-green-200 rounded px-3 mx-2">2</div>
+          <div className="flex rounded shadow p-1 mx-1 text-xs md:text-sm">
+            {props.fixture1}{" "}
+            <div className="bg-green-200 rounded px-3 mx-2">2</div>
           </div>
-          <div className="flex rounded shadow p-3">
-            BOU <div className="bg-red-200 rounded px-3 mx-2">3</div>
+          <div className="flex rounded shadow p-1 mx-1 text-xs md:text-sm">
+            {props.fixture2}{" "}
+            <div className="bg-red-200 rounded px-3 mx-2">3</div>
           </div>
         </div>
         <DialogFooter>

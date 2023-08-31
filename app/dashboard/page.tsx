@@ -15,9 +15,77 @@ async function getData() {
 
   return res.json();
 }
+async function getFixtures() {
+  const res = await fetch("http://localhost:3000/api/fixtures");
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+
+// Helper function to get player position based on element type
+function getPlayerPosition(elementType: number): string {
+  if (elementType === 1) {
+    return "Goalkeeper";
+  } else if (elementType === 2) {
+    return "Defender";
+  } else if (elementType === 3) {
+    return "Midfielder";
+  } else if (elementType === 4) {
+    return "Forward";
+  } else {
+    return "";
+  }
+}
+
+// Helper function to get player fixtures for a specific gameweek
+function getPlayerFixtures(
+  player: any,
+  gameweek: number,
+  fixtures: any
+): string {
+  return fixtures
+    .filter(
+      (fixture: any) =>
+        fixture.event === gameweek &&
+        (fixture.team_name_a === player.team_name ||
+          fixture.team_name_h === player.team_name)
+    )
+    .map((fixture: any) => {
+      if (fixture.team_name_h === player.team_name) {
+        return `${fixture.team_short_name_a} (H)`;
+      } else if (fixture.team_name_a === player.team_name) {
+        return `${fixture.team_short_name_h} (A)`;
+      }
+      return null;
+    });
+}
+
+// Helper function to get player captain status
+function getPlayerCaptainStatus(player: any): string {
+  if (player.is_captain) {
+    return "C";
+  } else if (player.is_vice_captain) {
+    return "V";
+  } else {
+    return "";
+  }
+}
+
+// Helper function to get player news
+function getPlayerNews(player: any): string | null {
+  return player.news !== "" ? player.news : null;
+}
 
 export default async function page() {
   const data = await getData();
+  const fixtures = await getFixtures();
+  const gameweek = 4;
 
   return (
     <>
@@ -40,25 +108,15 @@ export default async function page() {
                 <PlayerItem
                   elementName={player.web_name}
                   team={player.team_name}
-                  position={
-                    player.element_type == 1
-                      ? "Goalkeeper"
-                      : player.element_type == 2
-                      ? "Defender"
-                      : player.element_type == 3
-                      ? "Midfielder"
-                      : player.element_type == 4
-                      ? "Forward"
-                      : ""
-                  }
+                  position={getPlayerPosition(player.element_type)}
                   now_cost={player.now_cost}
-                  fixture="{player.fixture}"
+                  fixture={getPlayerFixtures(player, gameweek, fixtures)}
+                  fixture1={getPlayerFixtures(player, gameweek + 1, fixtures)}
+                  fixture2={getPlayerFixtures(player, gameweek + 2, fixtures)}
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={
-                    player.is_captain ? "C" : player.is_vice_captain ? "V" : ""
-                  }
+                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                 />
               ))}
@@ -73,25 +131,15 @@ export default async function page() {
                 <PlayerItem
                   elementName={player.web_name}
                   team={player.team_name}
-                  position={
-                    player.element_type == 1
-                      ? "Goalkeeper"
-                      : player.element_type == 2
-                      ? "Defender"
-                      : player.element_type == 3
-                      ? "Midfielder"
-                      : player.element_type == 4
-                      ? "Forward"
-                      : ""
-                  }
+                  position={getPlayerPosition(player.element_type)}
                   now_cost={player.now_cost}
-                  fixture="{player.fixture}"
+                  fixture={getPlayerFixtures(player, gameweek, fixtures)}
+                  fixture1={getPlayerFixtures(player, gameweek + 1, fixtures)}
+                  fixture2={getPlayerFixtures(player, gameweek + 2, fixtures)}
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={
-                    player.is_captain ? "C" : player.is_vice_captain ? "V" : ""
-                  }
+                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                 />
               ))}
@@ -106,25 +154,15 @@ export default async function page() {
                 <PlayerItem
                   elementName={player.web_name}
                   team={player.team_name}
-                  position={
-                    player.element_type == 1
-                      ? "Goalkeeper"
-                      : player.element_type == 2
-                      ? "Defender"
-                      : player.element_type == 3
-                      ? "Midfielder"
-                      : player.element_type == 4
-                      ? "Forward"
-                      : ""
-                  }
+                  position={getPlayerPosition(player.element_type)}
                   now_cost={player.now_cost}
-                  fixture="{player.fixture}"
+                  fixture={getPlayerFixtures(player, gameweek, fixtures)}
+                  fixture1={getPlayerFixtures(player, gameweek + 1, fixtures)}
+                  fixture2={getPlayerFixtures(player, gameweek + 2, fixtures)}
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={
-                    player.is_captain ? "C" : player.is_vice_captain ? "V" : ""
-                  }
+                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                 />
               ))}
@@ -139,25 +177,15 @@ export default async function page() {
                 <PlayerItem
                   elementName={player.web_name}
                   team={player.team_name}
-                  position={
-                    player.element_type == 1
-                      ? "Goalkeeper"
-                      : player.element_type == 2
-                      ? "Defender"
-                      : player.element_type == 3
-                      ? "Midfielder"
-                      : player.element_type == 4
-                      ? "Forward"
-                      : ""
-                  }
+                  position={getPlayerPosition(player.element_type)}
                   now_cost={player.now_cost}
-                  fixture="{player.fixture}"
+                  fixture={getPlayerFixtures(player, gameweek, fixtures)}
+                  fixture1={getPlayerFixtures(player, gameweek + 1, fixtures)}
+                  fixture2={getPlayerFixtures(player, gameweek + 2, fixtures)}
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={
-                    player.is_captain ? "C" : player.is_vice_captain ? "V" : ""
-                  }
+                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                 />
               ))}
@@ -169,25 +197,15 @@ export default async function page() {
                 <PlayerItem
                   elementName={player.web_name}
                   team={player.team_name}
-                  position={
-                    player.element_type == 1
-                      ? "Goalkeeper"
-                      : player.element_type == 2
-                      ? "Defender"
-                      : player.element_type == 3
-                      ? "Midfielder"
-                      : player.element_type == 4
-                      ? "Forward"
-                      : ""
-                  }
+                  position={getPlayerPosition(player.element_type)}
                   now_cost={player.now_cost}
-                  fixture="{player.fixture}"
+                  fixture={getPlayerFixtures(player, gameweek, fixtures)}
+                  fixture1={getPlayerFixtures(player, gameweek + 1, fixtures)}
+                  fixture2={getPlayerFixtures(player, gameweek + 2, fixtures)}
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={
-                    player.is_captain ? "C" : player.is_vice_captain ? "V" : ""
-                  }
+                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                 />
               ))}
