@@ -1,8 +1,22 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) and [`FastAPI`](https://fastapi.tiangolo.com/) webapp to provide useful analytics to FPL Managers. It recommends transfers, compares managers' teams to team selected by AI, compares managers' teams to top 15 FPL managers and also makes predictions on player points.
 
 ## Getting Started
 
-First, run the development server:
+First install FastAPI:
+
+```bash
+pip install fastapi
+pip install "uvicorn[standard]"
+```
+
+Then, run the fastAPI development server:
+
+```bash
+cd api
+uvicorn fastapi_trial:app --reload
+```
+
+Then, run the Nextjs development server:
 
 ```bash
 npm run dev
@@ -12,23 +26,17 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000/dashboard/your-manager-id](http://localhost:3000/dashboard/your-manager-id) with your browser to see your dashboard.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## ToDo
+- [x] Create user dashboard
+- [x] Fetch user data from FPL API
+- [ ] Preprocess user data
+- [x] Fetch fixture and team data
+- [ ] Create a data pipeline to store fetched data locally and use that until next update
+- [ ] Add analytics data to user's dashboard
+- [ ] Create a dynamic table with all players' data
+- [ ] Add search function to table
+- [ ] Create Model to predict player performances
+- [ ] Create team using best players according to predictions
+- [ ] Create an FPL team using top 15 FPL managers' data
