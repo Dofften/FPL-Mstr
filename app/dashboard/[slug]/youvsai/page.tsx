@@ -1,8 +1,8 @@
 import PlayerItem from "@/components/PlayerItem";
-import pitch from "../../../public/pitch.svg";
+import pitch from "../../../../public/pitch.svg";
 
-async function getData() {
-  const res = await fetch("http://localhost:3000/api/fpl");
+async function getData(x: number) {
+  const res = await fetch(`http://localhost:3000/api/fpl/${x}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -74,8 +74,8 @@ function getPlayerNews(player: any): string | null {
   return player.news !== "" ? player.news : null;
 }
 
-export default async function page() {
-  const data = await getData();
+export default async function page({ params }: { params: { slug: number } }) {
+  const data = await getData(params.slug);
   const fixtures = await getFixtures();
   const gameweek = 4;
   return (

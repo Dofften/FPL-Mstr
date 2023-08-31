@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-import json
 
 app = FastAPI()
 
@@ -16,6 +15,7 @@ def get_team_data(entry_id, gameweek):
 
     Args:
         entry_id (int) : ID of the team whose data is to be retrieved
+        gameweek (int) : Specific gameweek
     """
     base_url = "https://fantasy.premierleague.com/api/entry/"
     full_url = base_url + str(entry_id) + "/event/" + str(gameweek) + "/picks/"
@@ -33,6 +33,11 @@ def get_team_data(entry_id, gameweek):
 
 
 def get_game_data():
+    """Retrieve the gw-by-gw data
+
+    credit: vaastav/Fantasy-Premier-League/getters.py
+
+    """
     response = requests.get("https://fantasy.premierleague.com/api/bootstrap-static/")
     response.raise_for_status()
     data = response.json()
@@ -48,7 +53,6 @@ def get_player_data():
 
 
 def get_club_data():
-    # return pd.DataFrame(get_game_data()["teams"])
     teams = pd.read_csv("https://raw.githubusercontent.com/vaastav/Fantasy-Premier-League/master/data/2023-24/teams.csv")
     teams.rename(columns={'id':'team_id', 'code':'team_code','name':'team_name','short_name':'team_short_name'}, inplace = True)
     return teams
@@ -66,14 +70,8 @@ def get_current_gameweek():
 def get_fixtures_data():
     fixtures = pd.read_csv("https://raw.githubusercontent.com/vaastav/Fantasy-Premier-League/master/data/2023-24/fixtures.csv")
     teams = get_club_data()
-    # Assuming you have already defined fixtures_df and teams_df
-    # You can use   the merge function to join them on the id column
     combined_df = pd.merge(fixtures, teams, left_on='team_a', right_on='team_id', how='left', suffixes=('_a', '_h'))
-    # This will add the name and shortname columns from teams_df to fixtures_df for team_a
-    # You can repeat the same process for team_h
     combined_df = pd.merge(combined_df, teams, left_on='team_h', right_on='team_id', how='left', suffixes=('_a', '_h'))
-    # This will add the name and shortname columns from teams_df to combined_df for team_h
-    # You can drop the extra id columns if you don't need them
     combined_df = combined_df.drop(columns=['team_id_a', 'team_id_h'])
     return combined_df
 
@@ -90,9 +88,8 @@ def fixtures():
     return fixturesdf.to_dict(orient="records")
     
 
-@app.get("/api/fpl")
-def fpl_team():
-    team_id = 832519
+@app.get("/api/fpl/{team_id}")
+def fpl_team(team_id):
     team_data = get_team_data(team_id, gameweek=get_current_gameweek())
     team_data=team_data.merge(get_club_data()[['team_code','team_id','team_name','team_short_name']], left_on='team', right_on='team_id')
     return team_data.to_dict(orient="records")
