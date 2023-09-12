@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { SidebarNav } from "@/components/ui/ui/sidebar-nav";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -20,8 +22,8 @@ export default function SettingsLayout(props: {
       href: `/dashboard/${props.params.slug}/youvsai`,
     },
     {
-      title: "You vs Top 15",
-      href: `/dashboard/${props.params.slug}/top15`,
+      title: "You vs Top 250",
+      href: `/dashboard/${props.params.slug}/top250`,
     },
     {
       title: "All Players",
@@ -34,6 +36,7 @@ export default function SettingsLayout(props: {
   ];
   return (
     <>
+      <Header />
       <div>
         <div className="flex flex-col lg:flex-row">
           <aside className="">
@@ -42,6 +45,7 @@ export default function SettingsLayout(props: {
           <div className="flex-1">{props.children}</div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

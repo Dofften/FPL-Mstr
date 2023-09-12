@@ -26,22 +26,34 @@ export default function PlayerItem(props: {
   fixture1: string;
   fixture2: string;
   selected_by_percent: number;
+  top250?: number;
   predictedPoints?: number;
   captain?: string;
   news?: string;
+  image: string;
 }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <div className="relative">
           <div className="flex flex-col items-center cursor-pointer">
-            <Image
-              src="https://cdn.sofifa.net/players/220/697/23_120.png"
-              alt="jersey"
-              width={70}
-              height={70}
-              className="h-10 w-10 md:h-16 md:w-16"
-            />
+            {props.image ? (
+              <Image
+                src={props.image}
+                alt="jersey"
+                width={70}
+                height={70}
+                className="h-10 w-10 md:h-16 md:w-16"
+              />
+            ) : (
+              <Image
+                src="https://cdn.sofifa.net/player_0.svg"
+                alt="jersey"
+                width={70}
+                height={70}
+                className="h-10 w-10 md:h-16 md:w-16"
+              />
+            )}
             <div className="flex flex-col">
               <div
                 className={`${
@@ -80,13 +92,23 @@ export default function PlayerItem(props: {
           </div>
         ) : null}
         <DialogHeader className="flex flex-row items-center">
-          <Image
-            src="https://cdn.sofifa.net/players/220/697/23_120.png"
-            alt="jersey"
-            width={70}
-            height={70}
-            className="h-24 w-24"
-          />
+          {props.image ? (
+            <Image
+              src={props.image}
+              alt="jersey"
+              width={70}
+              height={70}
+              className="h-20 w-20 md:h-20 md:w-20"
+            />
+          ) : (
+            <Image
+              src="https://cdn.sofifa.net/player_0.svg"
+              alt="jersey"
+              width={70}
+              height={70}
+              className="h-20 w-20 md:h-20 md:w-20"
+            />
+          )}
           <div className="flex flex-col p-4 space-y-2">
             <DialogDescription className="content-center">
               <div className="bg-[#37003c] text-[#02efff] font-semibold text-center text-xs rounded-b w-fit p-1">
@@ -124,26 +146,28 @@ export default function PlayerItem(props: {
             <div className="font-bold">{props.selected_by_percent}%</div>
           </div>
           <Separator orientation="vertical" />
-          <div className="text-center">
-            <div className="text-xs">
-              <TooltipProvider delayDuration={10}>
-                <Tooltip>
-                  <TooltipTrigger
-                    asChild
-                    className="underline decoration-dotted"
-                  >
-                    <div>TO%</div>
-                  </TooltipTrigger>
-                  <TooltipContent side="left">
-                    <p className=" whitespace-normal">
-                      Ownership by Top 15 FPL Managers
-                    </p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+          {props.top250 ? (
+            <div className="text-center">
+              <div className="text-xs">
+                <TooltipProvider delayDuration={10}>
+                  <Tooltip>
+                    <TooltipTrigger
+                      asChild
+                      className="underline decoration-dotted"
+                    >
+                      <div>TO%</div>
+                    </TooltipTrigger>
+                    <TooltipContent side="left">
+                      <p className=" whitespace-normal">
+                        Ownership by Top 250 FPL Managers
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+              <div className="font-bold">52%</div>
             </div>
-            <div className="font-bold">52%</div>
-          </div>
+          ) : null}
         </div>
         <div className="relative flex items-center">
           <div className="flex-grow border-t border-gray-400"></div>

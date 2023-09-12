@@ -71,15 +71,10 @@ function getPlayerCaptainStatus(player: any): string {
   }
 }
 
-// Helper function to get player news
-function getPlayerNews(player: any): string | null {
-  return player.news !== "" ? player.news : null;
-}
-
 export default async function page({ params }: { params: { slug: number } }) {
   const data = await getData(params.slug);
   const fixtures = await getFixtures();
-  const gameweek = 4;
+  const gameweek = 5;
 
   return (
     <>
@@ -112,6 +107,7 @@ export default async function page({ params }: { params: { slug: number } }) {
                   predictedPoints={player.event_points}
                   captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  image={player.image}
                 />
               ))}
           </div>
@@ -135,6 +131,7 @@ export default async function page({ params }: { params: { slug: number } }) {
                   predictedPoints={player.event_points}
                   captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
           </div>
@@ -158,6 +155,7 @@ export default async function page({ params }: { params: { slug: number } }) {
                   predictedPoints={player.event_points}
                   captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
           </div>
@@ -181,6 +179,7 @@ export default async function page({ params }: { params: { slug: number } }) {
                   predictedPoints={player.event_points}
                   captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
           </div>
@@ -201,6 +200,7 @@ export default async function page({ params }: { params: { slug: number } }) {
                   predictedPoints={player.event_points}
                   captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
           </div>
