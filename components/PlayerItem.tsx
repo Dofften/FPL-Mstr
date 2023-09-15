@@ -123,7 +123,7 @@ export default function PlayerItem(props: {
             </DialogDescription>
           </div>
         </DialogHeader>
-        <div className="flex justify-evenly py-4 rounded-lg bg-opacity-50 bg-white drop-shadow-md text-[#37003c]">
+        <div className="flex justify-evenly py-4 rounded bg-opacity-50 bg-white drop-shadow-md text-[#37003c]">
           <div className="text-center">
             <div className="text-xs">Price</div>
             <div className="font-bold">
@@ -157,15 +157,15 @@ export default function PlayerItem(props: {
                     >
                       <div>TO%</div>
                     </TooltipTrigger>
-                    <TooltipContent side="left">
-                      <p className=" whitespace-normal">
+                    <TooltipContent side="left" className="bg-white rounded">
+                      <p className="whitespace-normal">
                         Ownership by Top 250 FPL Managers
                       </p>
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
               </div>
-              <div className="font-bold">52%</div>
+              <div className="font-bold">{props.top250.toFixed(1)}%</div>
             </div>
           ) : null}
         </div>

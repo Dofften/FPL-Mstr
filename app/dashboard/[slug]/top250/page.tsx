@@ -92,9 +92,6 @@ export default async function page({ params }: { params: { slug: number } }) {
   const fixtures = await getFixtures();
   const gameweek = 5;
 
-  console.log(top250);
-  console.log(data);
-
   return (
     <>
       <div className="flex flex-col lg:flex-row">
@@ -102,8 +99,14 @@ export default async function page({ params }: { params: { slug: number } }) {
           className="p-4 md:mr-2 md:border-r-2 md:w-[500px] lg:w-[600px]"
           style={{
             backgroundImage: `url(${pitch.src})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
+            backgroundPositionX: "center",
+            backgroundPositionY: "top",
+            backgroundSize: "725px 560px",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "initial",
+            backgroundOrigin: "initial",
+            backgroundClip: "initial",
+            backgroundColor: "initial",
           }}
         >
           <div className="flex justify-around">
@@ -121,7 +124,6 @@ export default async function page({ params }: { params: { slug: number } }) {
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                   image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
@@ -142,7 +144,6 @@ export default async function page({ params }: { params: { slug: number } }) {
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                   image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
@@ -163,7 +164,6 @@ export default async function page({ params }: { params: { slug: number } }) {
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                   image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
@@ -184,41 +184,25 @@ export default async function page({ params }: { params: { slug: number } }) {
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
                   image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
           </div>
-          {/* <div className="flex justify-around mt-2 pb-1 bg-[#72cf9fe6]/60 rounded-md">
-            {data
-              .filter((player: any) => player.position > 11)
-              .map((player: any) => (
-                <PlayerItem
-                  elementName={player.web_name}
-                  team={player.team_name}
-                  position={getPlayerPosition(player.element_type)}
-                  now_cost={player.now_cost}
-                  fixture={getPlayerFixtures(player, gameweek, fixtures)}
-                  fixture1={getPlayerFixtures(player, gameweek + 1, fixtures)}
-                  fixture2={getPlayerFixtures(player, gameweek + 2, fixtures)}
-                  form={player.form}
-                  selected_by_percent={player.selected_by_percent}
-                  predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
-                  news={player.news != "" ? player.news : null}
-                  image={player.image}
-                />
-              ))}
-          </div> */}
         </div>
 
         <div
           className="p-4 md:ml-2 md:border-l-2 md:w-[500px] lg:w-[600px]"
           style={{
             backgroundImage: `url(${pitch.src})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
+            backgroundPositionX: "center",
+            backgroundPositionY: "top",
+            backgroundSize: "725px 560px",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "initial",
+            backgroundOrigin: "initial",
+            backgroundClip: "initial",
+            backgroundColor: "initial",
           }}
         >
           <div className="flex justify-around">
@@ -236,8 +220,8 @@ export default async function page({ params }: { params: { slug: number } }) {
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  top250={player.top_ownership}
                   image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
@@ -257,8 +241,8 @@ export default async function page({ params }: { params: { slug: number } }) {
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  top250={player.top_ownership}
                   image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
@@ -278,8 +262,8 @@ export default async function page({ params }: { params: { slug: number } }) {
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  top250={player.top_ownership}
                   image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
@@ -299,33 +283,12 @@ export default async function page({ params }: { params: { slug: number } }) {
                   form={player.form}
                   selected_by_percent={player.selected_by_percent}
                   predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
                   news={player.news != "" ? player.news : null}
+                  top250={player.top_ownership}
                   image={`https://resources.premierleague.com/premierleague/photos/players/250x250/p${player.photo}`}
                 />
               ))}
           </div>
-          {/* <div className="flex justify-around mt-2 pb-1 bg-[#72cf9fe6]/60 rounded-md">
-            {top250
-              .filter((player: any) => player.position > 11)
-              .map((player: any) => (
-                <PlayerItem
-                  elementName={player.web_name}
-                  team={player.team_name}
-                  position={getPlayerPosition(player.element_type)}
-                  now_cost={player.now_cost}
-                  fixture={getPlayerFixtures(player, gameweek, fixtures)}
-                  fixture1={getPlayerFixtures(player, gameweek + 1, fixtures)}
-                  fixture2={getPlayerFixtures(player, gameweek + 2, fixtures)}
-                  form={player.form}
-                  selected_by_percent={player.selected_by_percent}
-                  predictedPoints={player.event_points}
-                  captain={getPlayerCaptainStatus(player)}
-                  news={player.news != "" ? player.news : null}
-                  image={player.image}
-                />
-              ))}
-          </div> */}
         </div>
       </div>
     </>
