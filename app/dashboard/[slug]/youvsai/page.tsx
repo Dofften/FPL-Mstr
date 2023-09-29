@@ -80,8 +80,14 @@ export default async function page({ params }: { params: { slug: number } }) {
           className="p-4 md:mr-2 md:border-r-2 md:w-[500px] lg:w-[600px]"
           style={{
             backgroundImage: `url(${pitch.src})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
+            backgroundPositionX: "center",
+            backgroundPositionY: "top",
+            backgroundSize: "725px 560px",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "initial",
+            backgroundOrigin: "initial",
+            backgroundClip: "initial",
+            backgroundColor: "initial",
           }}
         >
           <div className="flex justify-around">

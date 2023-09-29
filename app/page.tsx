@@ -1,9 +1,6 @@
 import Image from "next/image";
-import { Dela_Gothic_One } from "next/font/google";
 import { Input } from "@/components/ui/ui/input";
 import { Button } from "@/components/ui/ui/button";
-
-const dela = Dela_Gothic_One({ subsets: ["latin"], weight: "400" });
 
 export default function Home() {
   return (
