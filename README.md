@@ -41,9 +41,9 @@ Visit [http://localhost:3000/dashboard/your-team-id](http://localhost:3000/dashb
 - [ ] Preprocess user data
 - [x] Fetch fixture and team data
 - [ ] Create a data pipeline to store fetched data locally and use that until next update
-- [ ] Add analytics data to user's dashboard
+- [x] Add analytics data to user's dashboard
 - [ ] Create a dynamic table with all players' data
 - [ ] Add search function to table
-- [ ] Create Model to predict player performances
+- [x] Create Model to predict player performances
 - [ ] Create team using best players according to predictions
-- [ ] Create an FPL team using top 15 FPL managers' data
+- [ ] Create an FPL team using top 250 FPL managers' data
